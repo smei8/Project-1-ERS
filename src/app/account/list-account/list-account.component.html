@@ -1,0 +1,33 @@
+<div>
+    <div class="container mt-3">
+        <h2>User Accounts</h2>
+        <p>User informations</p>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Email</th>
+                    <th>Role ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let account of allAccount">
+                    <td>{{ account.epId }}</td>
+                    <td>{{ account.username }}</td>
+                    <td type="password" placeholder="Password">{{ account.password }}</td>
+                    <td>{{ account.fullName }}</td>
+                    <td>{{ account.email }}</td>
+                    <td>{{ account.roleId }}</td>
+                    <!-- Delete button -->
+                    <td>
+                        <button type="button"
+                                class="btn btn-primary"
+                                (click)="deleteAccount(account.epId)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
