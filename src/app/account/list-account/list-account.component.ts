@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Account } from '../account.model';
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'app-list-account',
@@ -7,53 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListAccountComponent implements OnInit {
 
-  oneAcount = {
-    epId: 101,
-    firstName: 'Bruno',
-    lastName: 'Jelly',
-    username: 'bruno123',
-    password: 'nonono',
-    email: 'brunoj@business.com',
-    roleId: 1
-  };
+  allAccount: Account[] = [];
+  toggleAdd: boolean = false;
 
-  allAccount = [
-    {
-      epId: 1,
-      username: 'bruno01',
-      password: 'nonono',
-      fullName: 'Bruno Fly',
-      email: 'brunoj@business.com',
-      roleId: 1
-    },
-    {
-      epId: 2,
-      username: 'levi01',
-      password: 'Levi631',
-      fullName: 'Levi Arckerman',
-      email: 'levi@business.com',
-      roleId: 2
-    },
-    {
-      epId: 3,
-      username: 'Storm01',
-      password: 'snow',
-      fullName: 'Snow Storm',
-      email: 'storm@business.com',
-      roleId: 2
-    }
-  ];
-  constructor() { }
+  newAccount: Account = {
+    userId: 0,
+    username: '',
+    password: '',
+    fullName: '',
+    email: '',
+    roleId: 0,
+    role: ''
+  }
+  constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
+    this.allAccount = this.accountService.fetchAllAccount();
   }
 
-  deleteAccount(epId: number) {
-    for(let i = 0; i < this.allAccount.length; i++) {
-      if(this.allAccount[i].epId == epId) {
-        this.allAccount.splice(i, 1);
-        break;
-      }
+  toggleAddForm() {
+    if(this.toggleAdd) {
+      this.toggleAdd = false;
+    } else {
+      this.toggleAdd = true;
     }
+  }
+
+  deleteAccount(userId: number) {
+    this.allAccount = this.accountService.deleteAccount(userId);
   }
 }

@@ -1,33 +1,73 @@
 <div>
-    <div class="container mt-3">
-        <h2>User Accounts</h2>
-        <p>User informations</p>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>User ID</th>
-                    <th>Username</th>
-                    <th>Password</th>
-                    <th>Email</th>
-                    <th>Role ID</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let account of allAccount">
-                    <td>{{ account.epId }}</td>
-                    <td>{{ account.username }}</td>
-                    <td type="password" placeholder="Password">{{ account.password }}</td>
-                    <td>{{ account.fullName }}</td>
-                    <td>{{ account.email }}</td>
-                    <td>{{ account.roleId }}</td>
-                    <!-- Delete button -->
-                    <td>
-                        <button type="button"
-                                class="btn btn-primary"
-                                (click)="deleteAccount(account.epId)">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="container mt-5">
+        <h2 class="text-center">Account Information</h2>
+        <div class="mx-auto bg-light text-dark rounded-3" style="padding: 30px">
+            <div>
+                <button type="button" class="btn btn-success" (click)="toggleAddForm()">Register New User</button>
+                <div class="card" *ngIf="toggleAdd">
+                    <div class="card-header">Register User</div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3 mt-3">
+                              <label for="username" class="form-label">Username:</label>
+                              <input type="text" class="form-control" id="username" placeholder="Enter username" name="userName">
+                            </div>
+                            <div class="mb-3">
+                              <label for="pwd" class="form-label">Password:</label>
+                              <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="userPswd">
+                            </div>
+                            <div class="mb-3 mt-3">
+                                <label for="name" class="form-label">Full Name:</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter fullname" name="userfullName">
+                            </div>
+                            <div class="mb-3 mt-3">
+                                <label for="email" class="form-label">Email:</label>
+                                <input type="text" class="form-control" id="email" placeholder="Enter username" name="userEmail">
+                            </div>
+                            <div class="mb-3 mt-3">
+                                <label for="browserrole" class="form-label">Position:</label>
+                                <input class="form-select" list="browserrole" id="browserrole" placeholder="Select your position" name="browserrole">
+                                <select id="browserrole">
+                                    <option id="browserrole">1 - Manager</option>
+                                    <option>2 - Associate</option>
+                                </select>
+                            </div>
+                          </form>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-success">register</button>
+                        <button type="button" class="btn btn-success">reset</button>
+                    </div>
+                  </div>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Role ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let account of allAccount">
+                        <td>{{ account.userId }}</td>
+                        <td>{{ account.username }}</td>
+                        <td>{{ account.password }}</td>
+                        <td>{{ account.fullName }}</td>
+                        <td>{{ account.email }}</td>
+                        <td>{{ account.roleId }}</td>
+                        <!-- Delete button -->
+                        <td>
+                            <button type="button"
+                                    class="btn btn-primary"
+                                    (click)="deleteAccount(account.userId)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>    
     </div>
 </div>
