@@ -94,7 +94,6 @@ export class AccountService {
       email: '',
       roleId: 0,
       role: ''
-    }
-
+    };
   }
 }

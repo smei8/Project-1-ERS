@@ -4,11 +4,11 @@
         <p>List of employee Reimbursement request informations</p>
 
         <div>
-            <button type="button" class="btn btn-success" (click)="toggleAddForm()">Create New Request</button>
+            <button type="button" class="btn btn-warning" (click)="toggleAddForm()">Create New Request</button>
             <div class="card mt-5" *ngIf="toggleAdd">
-                <div class="card-header bg-success text-white">Create A Reimbursment Request</div>
+                <div class="card-header bg-warning text-white">Create A Reimbursment Request</div>
                 <div class="card-body">
-                    <form>
+                    <form #myFormTemplate="ngForm" (ngSubmit)="addRequest()">
                         <div class="mb-3 mt-3">
                             <label for="type" class="form-label">Request Type:</label>
                             <input type="text" 
@@ -16,7 +16,9 @@
                                    id="type" 
                                    placeholder="Enter request type"
                                    name="requestTyep"
+                                   required #myType="ngModel"
                                    [(ngModel)]="newRequest.reqType">
+                            <div *ngIf="!myType.valid" class="small text-danger">Request Type requested!</div>
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="amount" class="form-label">Request Amount:</label>
@@ -25,14 +27,16 @@
                                    id="amount" 
                                    placeholder="Enter request amount"
                                    name="requestAmount"
+                                   required #myAmount="ngModel"
                                    [(ngModel)]="newRequest.reqAmount">
+                            <div *ngIf="!myAmount.valid" class="small text-danger">Request Amount requested!</div>
+                        </div>
+                        <div class="card-footer bg-warning">
+                            <button [disabled]="!myFormTemplate.valid" type="submit" class="btn btn-light">
+                                ADD
+                            </button>
                         </div>
                     </form>
-                </div>
-                <div class="card-footer bg-success">
-                    <button type="button" class="btn btn-light" (click)="addRequest()">
-                        ADD
-                    </button>
                 </div>
             </div>
         </div>
@@ -60,10 +64,13 @@
                     <td>{{ request.approvedDate }}</td>
                     <td>{{ request.manager }}</td>
                     <td>
-                        <button type="button" class="btn btn-primary">Approve</button>
+                        <button type="button" class="btn btn-warning">
+                            <i class="material-icons">check</i></button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary">Denied</button>
+                        <button type="button" class="btn btn-warning">
+                            <i class="material-icons">close</i>
+                        </button>
                     </td>
                 </tr>
             </tbody>

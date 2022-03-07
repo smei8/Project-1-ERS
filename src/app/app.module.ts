@@ -6,13 +6,20 @@ import { AppComponent } from './app.component';
 import { ListAccountComponent } from './account/list-account/list-account.component';
 import { ListRequestComponent } from './reimbursement/list-request/list-request.component';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './header/header.component';
+import { EditAccountComponent } from './account/edit-account/edit-account.component';
+import { LoginComponent } from './user/login/login.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ListAccountComponent,
-    ListRequestComponent
+    ListRequestComponent,
+    HeaderComponent,
+    EditAccountComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

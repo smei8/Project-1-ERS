@@ -1,0 +1,56 @@
+
+    <form (ngSubmit)="valiadteUser()" id="login-form" class="form-container text-center">
+        <h2 class="fw-bolder mb-4 text-center">
+            Login
+            <div class="text-warning">{{ errorMessage }}</div>
+        </h2>
+        <div class="mb-3 mt-3">
+            <label for="username" class="form-label">Username:</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="username" 
+                placeholder="Enter username" 
+                name="userName" 
+                required
+                #myUserName="ngModel" 
+                [(ngModel)]="newUser.userName">
+            <div *ngIf="!myUserName.valid" class="small text-danger">Username requested!</div>
+        </div>
+        <div class="mb-3">
+            <label for="pwd" class="form-label">Password:</label>
+            <input 
+                type="password" 
+                class="form-control" 
+                id="pwd" 
+                placeholder="Enter password" 
+                name="userPswd" required
+                #myPwd="ngModel" 
+                [(ngModel)]="newUser.password">
+            <div *ngIf="!myPwd.valid" class="small text-danger">Username requested!</div>
+        </div>
+        <div>
+            <label for="role" class="form-label">Position:</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="role" 
+                placeholder="Enter role" 
+                name="userRole" required
+                #myRole="ngModel" 
+                [(ngModel)]="newUser.role">
+            <div *ngIf="!myRole.valid" class="small text-danger">Role requested!</div>
+
+            <!-- <select class="form-select" id="role">
+                <input id="role" class="form-control" hidden="hidden" placeholder="select role" name="userRole" [(ngModel)]="newUser.role">
+                <option value="0"></option>
+                <option value="1">Mangaer</option>
+                <option value="2">Associate</option>
+            </select> -->
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-warning">LOGIN</button>
+        </div>
+     <a id="reset" class="text-decoration-none" routerLink="forgot-password">Forgot Password?</a>
+    </form>
+
