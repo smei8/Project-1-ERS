@@ -26,7 +26,7 @@ export class EditAccountComponent implements OnInit {
 
   ngOnInit(): void {
     let accountId: any = this.activatededRoute.snapshot.paramMap.get("id")
-    this.newAccount = this.accountService.fetchAAccount(accountId);
+    //this.newAccount = this.accountService.fetchAAccount(accountId);
   }
 
   updateAccount() {

@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { EditAccountComponent } from './account/edit-account/edit-account.component';
 import { LoginComponent } from './user/login/login.component';
+import { HttpClientModule } from '@angular/common/http'; 
 
 
 
@@ -24,7 +25,8 @@ import { LoginComponent } from './user/login/login.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

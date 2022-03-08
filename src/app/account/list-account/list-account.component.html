@@ -1,8 +1,8 @@
-<div>
+<div> 
     <div class="container mt-5">
         <h2 class="text-center">Account Information</h2>
         <div class="mx-auto bg-light text-dark rounded-3" style="padding: 30px">
-            <div>
+            <!-- <div>
                 <button type="button" class="btn btn-warning" (click)="toggleAddForm()">Add New User</button>
                 <div class="card" *ngIf="toggleAdd">
                     <div class="card-header">New User</div>
@@ -65,7 +65,7 @@
                           </form>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -86,7 +86,7 @@
                         <td>{{ account.email }}</td>
                         <td>{{ account.roleId }}</td>
                         <!-- Delete button -->
-                        <td>
+                        <!-- <td>
                             <button type="button" 
                                     class="btn btn-warning" 
                                     (click)="goToEditBook(account.userId)">
@@ -96,7 +96,7 @@
                         <td>
                             <button type="button" class="btn btn-warning" (click)="deleteAccount(account.userId)">
                                 <i class="material-icons">delete</i></button>
-                        </td>
+                        </td> -->
                     </tr>
                 </tbody>
             </table>

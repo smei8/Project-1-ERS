@@ -23,10 +23,11 @@ export class ListAccountComponent implements OnInit {
     role: ''
   }
   
-  constructor(private accountService: AccountService, private router: Router) { }
+  constructor(private accountService: AccountService, 
+              private router: Router) { }
 
   ngOnInit(): void {
-    this.allAccount = this.accountService.fetchAllAccount();
+    this.loadAllAccount();
   }
 
   toggleAddForm() {
@@ -37,36 +38,23 @@ export class ListAccountComponent implements OnInit {
     }
   }
 
+  loadAllAccount() {
+    this.accountService.fetchAllAccount().subscribe((response) => {
+      console.log(response);
+      this.allAccount = response;
+    });
+  }
+
   goToEditBook(userId: number) {
     //route to edit account component, paht is account-edit
     this.router.navigate(['account-edit', userId]);
   }
 
-  addAccount() {
-    let addNewAccount: Account = {
-      userId: 0,
-      username: this.newAccount.username,
-      password: this.newAccount.password,
-      fullName: this.newAccount.fullName,
-      email: this.newAccount.email,
-      roleId: 0,
-      role: this.newAccount.role
-    }
+  // addAccount() {
+  //   this.accountService.addAccount(this.newAccount)
+  // }
 
-    this.accountService.addAccount(addNewAccount);
-    this.allAccount = this.accountService.fetchAllAccount();
-
-    this.newAccount = {
-      userId: 0,
-      username: '',
-      password: '',
-      fullName: '',
-      email: '',
-      roleId: 0,
-      role: ''
-    }
-  }
-  deleteAccount(userId: number) {
-    this.allAccount = this.accountService.deleteAccount(userId);
-  }
+  // deleteAccount(userId: number) {
+    
+  // }
 }

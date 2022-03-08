@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Account } from '../account/account.model';
 import { AccountService } from '../account/account.service';
@@ -12,15 +13,10 @@ export class UserService {
 
   allAccounts: Account [] = [];
 
-  constructor(private authService: AuthService, private accountService: AccountService) { }
+  constructor(private authService: AuthService, 
+              private http: HttpClient) { }
 
   valiadteUser(newUser: User): User {
-    this.allAccounts = this.accountService.fetchAllAccount();
-    let username: string = this.accountService.fetchAAccount(this.allAccounts).username;
-    let password: string = this.accountService.fetchAAccount(this.allAccounts).password;
-    let getrole: number = this.accountService.fetchAAccount(this.allAccounts).roleId;
-
-
     if(newUser.role=='Manager' && newUser.userName=="bruno01" && newUser.password=="nonono") {
       //1. store user information in browser storage
       this.authService.storeUser(newUser);
