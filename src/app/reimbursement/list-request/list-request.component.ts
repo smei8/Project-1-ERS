@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Request } from '../request.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-request',
@@ -23,10 +24,11 @@ export class ListRequestComponent implements OnInit {
       manager: ''
     };
   
-  constructor(private requestService: RequestService) { }
+  constructor(private requestService: RequestService,
+              private router: Router) { }
 
   ngOnInit(): void {
-    this.allRequests = this.requestService.viewAllRequest();
+    this.loadAllRequests();
   }
 
   toggleAddForm() {
@@ -37,30 +39,28 @@ export class ListRequestComponent implements OnInit {
     }
   }
 
+  loadAllRequests() {
+    this.requestService.viewAllRequest().subscribe((response) => {
+      console.log(response);
+      this.allRequests = response;
+    });
+  }
+  
   addRequest() {
-    let addNewRequest: Request = {
-      reqId: 0,
-      userId: this.newRequest.userId,
-      reqType: this.newRequest.reqType,
-      reqAmount: this.newRequest.reqAmount,
-      reqStatus: this.newRequest.reqStatus,
-      submitDate: this.newRequest.submitDate,
-      approvedDate: this.newRequest.approvedDate,
-      manager: this.newRequest.manager
-    };
+    this.requestService.addRequest(this.newRequest).subscribe((response) => {
+      console.log(response);
+      this.newRequest = {
+        reqId: 0,
+        userId: 0,
+        reqType: '',
+        reqAmount: 0,
+        reqStatus: '',
+        submitDate: '',
+        approvedDate: '',
+        manager: ''
+      };
 
-    this.requestService.addRequest(addNewRequest);
-    this.allRequests = this.requestService.viewAllRequest();
-
-    this.newRequest = {
-      reqId: 0,
-      userId: 0,
-      reqType: '',
-      reqAmount: 0,
-      reqStatus: '',
-      submitDate: '',
-      approvedDate: '',
-      manager: ''
-    };
+      this.loadAllRequests();
+    });
   }
 }

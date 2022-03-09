@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ConnectableObservable } from 'rxjs';
 import { User } from './login/user.model';
 
 @Injectable({
@@ -18,6 +19,8 @@ export class AuthService {
 
   retrieveUser(): User {
     let data: any = sessionStorage.getItem("userInfo");
+    console.log("this is data:"+ data);
+    console.log(this.loggedIn);
     return JSON.parse(data);
   }
 

@@ -26,6 +26,6 @@ export class AccountService {
   }
 
   fetchAAccount(userId: any): Observable<Account> {
-    return this.http.get<Account>("http://localhost:4040/api/books/"+userId);
+    return this.http.get<Account>("http://localhost:4040/api/accounts/"+userId);
   }
 }

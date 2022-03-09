@@ -10,6 +10,8 @@ import { HeaderComponent } from './header/header.component';
 import { EditAccountComponent } from './account/edit-account/edit-account.component';
 import { LoginComponent } from './user/login/login.component';
 import { HttpClientModule } from '@angular/common/http'; 
+import { LogoutComponent } from './user/logout/logout.component';
+import { EmployeeComponent } from './user/employee/employee.component';
 
 
 
@@ -21,6 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     EditAccountComponent,
     LoginComponent,
+    LogoutComponent,
+    EmployeeComponent
   ],
   imports: [
     BrowserModule,

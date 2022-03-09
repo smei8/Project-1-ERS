@@ -10,12 +10,23 @@
                 <div class="card-body">
                     <form #myFormTemplate="ngForm" (ngSubmit)="addRequest()">
                         <div class="mb-3 mt-3">
+                            <label for="userId" class="form-label">User Id:</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="userId" 
+                                   placeholder="Enter user Id"
+                                   name="requestUserId"
+                                   required #myUserid="ngModel"
+                                   [(ngModel)]="newRequest.userId">
+                            <div *ngIf="!myUserid.valid" class="small text-danger">User ID requested!</div>
+                        </div>
+                        <div class="mb-3 mt-3">
                             <label for="type" class="form-label">Request Type:</label>
                             <input type="text" 
                                    class="form-control" 
                                    id="type" 
                                    placeholder="Enter request type"
-                                   name="requestTyep"
+                                   name="requestType"
                                    required #myType="ngModel"
                                    [(ngModel)]="newRequest.reqType">
                             <div *ngIf="!myType.valid" class="small text-danger">Request Type requested!</div>
@@ -31,6 +42,16 @@
                                    [(ngModel)]="newRequest.reqAmount">
                             <div *ngIf="!myAmount.valid" class="small text-danger">Request Amount requested!</div>
                         </div>
+                        <!-- <div class="mb-3 mt-3">
+                            <label for="status" class="form-label">Request Status:</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="status" 
+                                   placeholder="request status"
+                                   name="requestStatus"
+                                   required #myStatus="ngModel"
+                                   [(ngModel)]="newRequest.reqStatus">
+                        </div> -->
                         <div class="card-footer bg-warning">
                             <button [disabled]="!myFormTemplate.valid" type="submit" class="btn btn-light">
                                 ADD

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Account } from '../account/account.model';
 import { AccountService } from '../account/account.service';
 import { RequestService } from '../reimbursement/request.service';
@@ -16,28 +17,33 @@ export class UserService {
   constructor(private authService: AuthService, 
               private http: HttpClient) { }
 
-  valiadteUser(newUser: User): User {
-    if(newUser.role=='Manager' && newUser.userName=="bruno01" && newUser.password=="nonono") {
-      //1. store user information in browser storage
-      this.authService.storeUser(newUser);
+login(user: User): Observable<User>{
+  console.log(user);
+  return this.http.post<any>("http://localhost:4040/api/login", JSON.stringify(user));
+}
 
-      //2. mark that we have logged in
-      this.authService.loggedIn = true;
+  // valiadteUser(newUser: User): User {
+  //   if(newUser.role_id==1 && newUser.userName=="bruno01" && newUser.password=="nonono") {
+  //     //1. store user information in browser storage
+  //     this.authService.storeUser(newUser);
 
-    } else if(newUser.role=="associate" && newUser.userName=="levi01" && newUser.password=="Levi631") {
-      //1. store user information in browser storage
-      this.authService.storeUser(newUser);
+  //     //2. mark that we have logged in
+  //     this.authService.loggedIn = true;
 
-      //2. mark that we have logged in
-      this.authService.loggedIn = true; 
+  //   } else if(newUser.role_id==2 && newUser.userName=="levi01" && newUser.password=="Levi631") {
+  //     //1. store user information in browser storage
+  //     this.authService.storeUser(newUser);
 
-    } else {
-      newUser = {
-        userName: "",
-        password: "",
-        role: ""
-      }
-    }
-    return newUser;
-  }
+  //     //2. mark that we have logged in
+  //     this.authService.loggedIn = true; 
+
+  //   } else {
+  //     newUser = {
+  //       userName: "",
+  //       password: "",
+  //       role_id: 0
+  //     }
+  //   }
+  //   return newUser;
+  // }
 }

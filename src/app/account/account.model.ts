@@ -1,9 +1,9 @@
 export interface Account {
-    userId: number,
+    userID: number,
     username: string,
     password: string,
     fullName: string,
     email: string,
-    roleId: number,
+    role_id: number,
     role: string
 }

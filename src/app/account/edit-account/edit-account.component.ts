@@ -11,12 +11,12 @@ import { AccountService } from '../account.service';
 export class EditAccountComponent implements OnInit {
 
   newAccount: Account = {
-    userId: 0,
+    userID: 0,
     username: "",
     password: "",
     fullName: "",
     email: "",
-    roleId: 0,
+    role_id: 0,
     role: ""
   }
   

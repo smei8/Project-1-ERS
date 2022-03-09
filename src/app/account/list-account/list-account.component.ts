@@ -14,12 +14,12 @@ export class ListAccountComponent implements OnInit {
   toggleAdd: boolean = false;
 
   newAccount: Account = {
-    userId: 0,
+    userID: 0,
     username: '',
     password: '',
     fullName: '',
     email: '',
-    roleId: 0,
+    role_id: 0,
     role: ''
   }
   
