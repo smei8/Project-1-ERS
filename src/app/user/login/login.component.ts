@@ -29,26 +29,28 @@ export class LoginComponent implements OnInit {
 
   validateUser() {
     console.log(this.userService.login(this.newUser));
-    this.newUser = {
-      username: this.newUser.username,
-      password: this.newUser.password,
-      role_id: this.newUser.role_id
-    };
+    // this.newUser = {
+    //   username: this.newUser.username,
+    //   password: this.newUser.password,
+    //   role_id: this.newUser.role_id
+    // };
     this.userService.login(this.newUser).subscribe(response => {
       console.log(response);
       //let receivedUser: User = response;
       // if I received am empty user 
       //console.log(response.username)
-      if(response.username == ""){
+      if(response.username == "") {
         // do the stuff for an empty user
         this.errorMessage = "Invalid Credentials!!";
         console.log("BAD CREDENTIAL")
       } else {
-        if (response.role_id == 1){
-          //navigate to book-crud
+        if (response.role_id == 1) {
+          
           this.authService.storeUser(this.newUser);
+
           // 2. mark that we have logged in
           this.authService.loggedIn=true;
+          
           console.log(this.authService.loggedIn);
           this.router.navigate(['request-list']);
 

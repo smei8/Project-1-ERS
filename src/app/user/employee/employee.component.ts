@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Account } from 'src/app/account/account.model';
 import { AccountService } from 'src/app/account/account.service';
+import { AuthService } from '../auth.service';
+import { User } from '../login/user.model';
 
 @Component({
   selector: 'app-employee',
@@ -19,16 +21,20 @@ export class EmployeeComponent implements OnInit {
     role: ''
   }
   
-  constructor(private accountService: AccountService) { }
+  constructor(private accountService: AccountService,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
     this.loadCurrentUser();
   }
 
   loadCurrentUser() {
-    console.log(this.newAccount.userID);
-    this.accountService.fetchAAccount(this.newAccount.userID).subscribe((response) => {
+    let currentUser: User = this.authService.retrieveUser();
+    console.log(currentUser);
+    this.accountService.fetchAAccount(currentUser.username)
+    this.accountService.fetchAAccount(currentUser.username).subscribe((response) => {
       console.log("this is response"+response);
+
       this.newAccount = response;
     });
   }
