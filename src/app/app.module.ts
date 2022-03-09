@@ -12,6 +12,8 @@ import { LoginComponent } from './user/login/login.component';
 import { HttpClientModule } from '@angular/common/http'; 
 import { LogoutComponent } from './user/logout/logout.component';
 import { EmployeeComponent } from './user/employee/employee.component';
+import { ManagerComponent } from './user/manager/manager.component';
+import { EpRequestComponent } from './user/employee/ep-request/ep-request.component';
 
 
 
@@ -24,7 +26,9 @@ import { EmployeeComponent } from './user/employee/employee.component';
     EditAccountComponent,
     LoginComponent,
     LogoutComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    ManagerComponent,
+    EpRequestComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,74 @@
+<div class="container mt-3">
+    <div class="card mt-5">
+        <div class="card-header bg-warning text-white">
+            <span class="sld-text-heading-small">Expense Reimbursements</span>
+        </div>
+
+        <div class="card-body">
+            <div class="search-container">
+                <div>
+                    <button type="button" class="btn btn-warning" (click)="toggleAddForm()">Create New Request</button>
+                    <div class="card mt-5" *ngIf="toggleAdd">
+                        <div class="card-header bg-warning text-white">Create A Reimbursment Request</div>
+                        <div class="card-body">
+                            <form #myFormTemplate="ngForm" (ngSubmit)="addRequest()">
+                                <div class="mb-3 mt-3">
+                                    <label for="userId" class="form-label">User Id:</label>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           id="userId" 
+                                           placeholder="Enter user Id"
+                                           name="requestUserId"
+                                           required #myUserid="ngModel"
+                                           [(ngModel)]="newRequest.userId">
+                                    <div *ngIf="!myUserid.valid" class="small text-danger">User ID requested!</div>
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="type" class="form-label">Request Type:</label>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           id="type" 
+                                           placeholder="Enter request type"
+                                           name="requestType"
+                                           required #myType="ngModel"
+                                           [(ngModel)]="newRequest.reqType">
+                                    <div *ngIf="!myType.valid" class="small text-danger">Request Type requested!</div>
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="amount" class="form-label">Request Amount:</label>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           id="amount" 
+                                           placeholder="Enter request amount"
+                                           name="requestAmount"
+                                           required #myAmount="ngModel"
+                                           [(ngModel)]="newRequest.reqAmount">
+                                    <div *ngIf="!myAmount.valid" class="small text-danger">Request Amount requested!</div>
+                                </div>
+                                <!-- <div class="mb-3 mt-3">
+                                    <label for="status" class="form-label">Request Status:</label>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           id="status" 
+                                           placeholder="request status"
+                                           name="requestStatus"
+                                           required #myStatus="ngModel"
+                                           [(ngModel)]="newRequest.reqStatus">
+                                </div> -->
+                                <div class="card-footer bg-warning">
+                                    <button [disabled]="!myFormTemplate.valid" type="submit" class="btn btn-light">
+                                        ADD
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="empty-container">
+                <span class="text-justify center">No reimbursement found</span>
+            </div> -->
+        </div>
+    </div>
+</div>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Request } from '../request.model';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/user/auth.service';
+import { ConnectableObservable } from 'rxjs';
 
 @Component({
   selector: 'app-list-request',
@@ -25,7 +27,8 @@ export class ListRequestComponent implements OnInit {
     };
   
   constructor(private requestService: RequestService,
-              private router: Router) { }
+              private router: Router,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
     this.loadAllRequests();
@@ -40,9 +43,20 @@ export class ListRequestComponent implements OnInit {
   }
 
   loadAllRequests() {
+    //this has current manager info that logged in
+    let currentManager: any = this.authService.retrieveUser();
+    console.log(currentManager);
+
+    //get all requests from the backend and stored in response
     this.requestService.viewAllRequest().subscribe((response) => {
-      console.log(response);
-      this.allRequests = response;
+      console.log(response); // a list of all requests
+
+      for(let i = 0; i < response.length; i++) {
+        if(response[i].manager == currentManager.userID) {
+          console.log(this.allRequests[i]);
+          this.allRequests.push(response[i]);
+        }  
+      }
     });
   }
   

@@ -18,6 +18,9 @@ export class RequestService {
     return this.http.post<Request>("http://localhost:4040/api/requests", JSON.stringify(requestModel));
   }
 
+  fetchARequest(reqId: any): Observable<Request> {
+    return this.http.get<Request>("http://localhost:4040/api/requests/"+reqId);
+  }
   // viewPendingRequest(reqId: any): Request {
 
 

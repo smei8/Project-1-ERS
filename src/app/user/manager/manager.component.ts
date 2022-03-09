@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Account } from 'src/app/account/account.model';
 import { AccountService } from 'src/app/account/account.service';
 import { AuthService } from '../auth.service';
-import { User } from '../login/user.model';
 
 @Component({
-  selector: 'app-employee',
-  templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.css']
+  selector: 'app-manager',
+  templateUrl: './manager.component.html',
+  styleUrls: ['./manager.component.css']
 })
-export class EmployeeComponent implements OnInit {
+export class ManagerComponent implements OnInit {
 
   newAccount: Account = {
     userID: 0,
@@ -21,8 +20,8 @@ export class EmployeeComponent implements OnInit {
     role: ''
   }
   
-  constructor(private accountService: AccountService,
-              private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.loadCurrentUser();
@@ -30,10 +29,8 @@ export class EmployeeComponent implements OnInit {
 
   loadCurrentUser() {
     let currentUser: any = this.authService.retrieveUser();
-    console.log(currentUser);
-    this.accountService.fetchAAccount(currentUser.userID).subscribe((response) => {
-      console.log("this is response"+response);
 
+    this.accountService.fetchAAccount(currentUser.userID).subscribe((response) => {
       this.newAccount = response;
     });
   }

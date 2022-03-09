@@ -4,7 +4,10 @@
         <p>List of employee Reimbursement request informations</p>
 
         <div>
-            <button type="button" class="btn btn-warning" (click)="toggleAddForm()">Create New Request</button>
+            <div class="d-grid">
+                <button type="button" class="btn btn-warning btn-block" (click)="toggleAddForm()">All Reimbursement Request</button>
+            </div>
+ 
             <div class="card mt-5" *ngIf="toggleAdd">
                 <div class="card-header bg-warning text-white">Create A Reimbursment Request</div>
                 <div class="card-body">
@@ -84,7 +87,7 @@
                     <td>{{ request.submitDate }}</td>
                     <td>{{ request.approvedDate }}</td>
                     <td>{{ request.manager }}</td>
-                    <td>
+                    <!-- <td>
                         <button type="button" class="btn btn-warning">
                             <i class="material-icons">check</i></button>
                     </td>
@@ -92,9 +95,10 @@
                         <button type="button" class="btn btn-warning">
                             <i class="material-icons">close</i>
                         </button>
-                    </td>
+                    </td> -->
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+
