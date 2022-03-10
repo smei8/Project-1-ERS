@@ -30,10 +30,7 @@ export class EmployeeComponent implements OnInit {
 
   loadCurrentUser() {
     let currentUser: any = this.authService.retrieveUser();
-    console.log(currentUser);
     this.accountService.fetchAAccount(currentUser.userID).subscribe((response) => {
-      console.log("this is response"+response);
-
       this.newAccount = response;
     });
   }

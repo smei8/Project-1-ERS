@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LogoutComponent } from './user/logout/logout.component';
 import { EmployeeComponent } from './user/employee/employee.component';
 import { ManagerComponent } from './user/manager/manager.component';
-import { EpRequestComponent } from './user/employee/ep-request/ep-request.component';
+import { EpRequestComponent } from './user/ep-request/ep-request.component';
 
 
 

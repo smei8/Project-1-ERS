@@ -5,7 +5,7 @@ import { ListAccountComponent } from './account/list-account/list-account.compon
 import { ListRequestComponent } from './reimbursement/list-request/list-request.component';
 import { AuthGuard } from './user/auth.guard';
 import { EmployeeComponent } from './user/employee/employee.component';
-import { EpRequestComponent } from './user/employee/ep-request/ep-request.component';
+import { EpRequestComponent } from './user/ep-request/ep-request.component';
 import { LoginComponent } from './user/login/login.component';
 import { LogoutComponent } from './user/logout/logout.component';
 import { ManagerComponent } from './user/manager/manager.component';

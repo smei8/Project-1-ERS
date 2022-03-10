@@ -12,6 +12,7 @@ import { User } from './user.model';
 })
 export class LoginComponent implements OnInit {
 
+  loading: boolean = false;
   newUser: User = {
     username: "",
     password: "",

@@ -4,101 +4,90 @@
         <p>List of employee Reimbursement request informations</p>
 
         <div>
-            <div class="d-grid">
-                <button type="button" class="btn btn-warning btn-block" (click)="toggleAddForm()">All Reimbursement Request</button>
-            </div>
- 
-            <div class="card mt-5" *ngIf="toggleAdd">
-                <div class="card-header bg-warning text-white">Create A Reimbursment Request</div>
-                <div class="card-body">
-                    <form #myFormTemplate="ngForm" (ngSubmit)="addRequest()">
-                        <div class="mb-3 mt-3">
-                            <label for="userId" class="form-label">User Id:</label>
-                            <input type="text" 
-                                   class="form-control" 
-                                   id="userId" 
-                                   placeholder="Enter user Id"
-                                   name="requestUserId"
-                                   required #myUserid="ngModel"
-                                   [(ngModel)]="newRequest.userId">
-                            <div *ngIf="!myUserid.valid" class="small text-danger">User ID requested!</div>
-                        </div>
-                        <div class="mb-3 mt-3">
-                            <label for="type" class="form-label">Request Type:</label>
-                            <input type="text" 
-                                   class="form-control" 
-                                   id="type" 
-                                   placeholder="Enter request type"
-                                   name="requestType"
-                                   required #myType="ngModel"
-                                   [(ngModel)]="newRequest.reqType">
-                            <div *ngIf="!myType.valid" class="small text-danger">Request Type requested!</div>
-                        </div>
-                        <div class="mb-3 mt-3">
-                            <label for="amount" class="form-label">Request Amount:</label>
-                            <input type="text" 
-                                   class="form-control" 
-                                   id="amount" 
-                                   placeholder="Enter request amount"
-                                   name="requestAmount"
-                                   required #myAmount="ngModel"
-                                   [(ngModel)]="newRequest.reqAmount">
-                            <div *ngIf="!myAmount.valid" class="small text-danger">Request Amount requested!</div>
-                        </div>
-                        <!-- <div class="mb-3 mt-3">
-                            <label for="status" class="form-label">Request Status:</label>
-                            <input type="text" 
-                                   class="form-control" 
-                                   id="status" 
-                                   placeholder="request status"
-                                   name="requestStatus"
-                                   required #myStatus="ngModel"
-                                   [(ngModel)]="newRequest.reqStatus">
-                        </div> -->
-                        <div class="card-footer bg-warning">
-                            <button [disabled]="!myFormTemplate.valid" type="submit" class="btn btn-light">
-                                ADD
-                            </button>
-                        </div>
-                    </form>
+            <div>
+                <div class="d-grid">
+                    <button type="button" class="btn btn-warning btn-block" (click)="toggleAllRequests()">All Reimbursement Request</button>
                 </div>
+                <table class="table table-hover" *ngIf="toggleRequests">
+                    <thead>
+                        <tr>
+                            <th>Request ID</th>
+                            <th>User ID</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Submited Date</th>
+                            <th>Approveed Date</th>
+                            <th>Manager</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let request of allRequests">
+                            <td>{{ request.reqId }}</td>
+                            <td>{{ request.userId }}</td>
+                            <td type="password" placeholder="Password">{{ request.reqType }}</td>
+                            <td>{{ request.reqAmount | currency }}</td>
+                            <td>{{ request.reqStatus }}</td>
+                            <td>{{ request.submitDate }}</td>
+                            <td>{{ request.approvedDate }}</td>
+                            <td>{{ request.manager }}</td>
+                            <!-- <td>
+                                <button type="button" class="btn btn-warning">
+                                    <i class="material-icons">check</i></button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-warning">
+                                    <i class="material-icons">close</i>
+                                </button>
+                            </td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <div class="d-grid">
+                    <button type="button" class="btn btn-warning btn-block" (click)="togglePending()">All Pending Reimbursement Request</button>
+                </div>
+
+                <table class="table table-hover" *ngIf="togglePReq">
+                    <thead>
+                        <tr>
+                            <th>Request ID</th>
+                            <th>User ID</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Submited Date</th>
+                            <th>Approveed Date</th>
+                            <th>Manager</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let request of allRequests">
+                            <td>{{ request.reqId }}</td>
+                            <td>{{ request.userId }}</td>
+                            <td type="password" placeholder="Password">{{ request.reqType }}</td>
+                            <td>{{ request.reqAmount | currency }}</td>
+                            <td>{{ request.reqStatus }}</td>
+                            <td>{{ request.submitDate }}</td>
+                            <td>{{ request.approvedDate }}</td>
+                            <td>{{ request.manager }}</td>
+                            <td>
+                                <button type="button" class="btn btn-warning">
+                                    <i class="material-icons">check</i></button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-warning">
+                                    <i class="material-icons">close</i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Request ID</th>
-                    <th>User ID</th>
-                    <th>Type</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                    <th>Submited Date</th>
-                    <th>Approveed Date</th>
-                    <th>Manager</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let request of allRequests">
-                    <td>{{ request.reqId }}</td>
-                    <td>{{ request.userId }}</td>
-                    <td type="password" placeholder="Password">{{ request.reqType }}</td>
-                    <td>{{ request.reqAmount }}</td>
-                    <td>{{ request.reqStatus }}</td>
-                    <td>{{ request.submitDate }}</td>
-                    <td>{{ request.approvedDate }}</td>
-                    <td>{{ request.manager }}</td>
-                    <!-- <td>
-                        <button type="button" class="btn btn-warning">
-                            <i class="material-icons">check</i></button>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-warning">
-                            <i class="material-icons">close</i>
-                        </button>
-                    </td> -->
-                </tr>
-            </tbody>
-        </table>
     </div>
 </div>
 
+       

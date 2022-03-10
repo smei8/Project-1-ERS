@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RequestService } from 'src/app/reimbursement/request.service';
 import { Request } from 'src/app/reimbursement/request.model';
+import { Account } from 'src/app/account/account.model';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-ep-request',
@@ -13,6 +15,16 @@ export class EpRequestComponent implements OnInit {
   allEpRequests: Request[] = [];
   toggleAdd: boolean = false;
 
+  newAccount: Account = {
+    userID: 0,
+    username: "",
+    password: "",
+    fullName: "",
+    email: "",
+    role_id: 0,
+    role: ""
+  }
+  
   newRequest: Request = {
     reqId: 0,
     userId: 0,
@@ -25,9 +37,11 @@ export class EpRequestComponent implements OnInit {
   };
 
   constructor(private requestService: RequestService,
-              private router: Router) { }
+              private router: Router,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.loadAllRequests();
   }
 
   toggleAddForm() {
@@ -39,13 +53,21 @@ export class EpRequestComponent implements OnInit {
   }
 
   loadAllRequests() {
+    let currentEmployee: any = this.authService.retrieveUser();
     this.requestService.viewAllRequest().subscribe((response) => {
       console.log(response);
-      this.allEpRequests = response;
+
+      for(let i = 0; i < response.length; i++) {
+        if(response[i].userId == currentEmployee.userID) {
+          this.allEpRequests.push(response[i]);
+        }
+      }
     });
   }
 
   addRequest() {
+    //let currentUser: any = this.authService.retrieveUser();
+    //console.log(currentUser);
     this.requestService.addRequest(this.newRequest).subscribe((response) => {
       console.log(response);
       this.newRequest = {

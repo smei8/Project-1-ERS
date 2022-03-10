@@ -13,7 +13,9 @@ import { ConnectableObservable } from 'rxjs';
 export class ListRequestComponent implements OnInit {
 
   allRequests: Request[] = [];
-  toggleAdd: boolean = false;
+
+  togglePReq: boolean = false;
+  toggleRequests: boolean = false;
   
   newRequest: Request = {
       reqId: 0,
@@ -34,11 +36,19 @@ export class ListRequestComponent implements OnInit {
     this.loadAllRequests();
   }
 
-  toggleAddForm() {
-    if(this.toggleAdd) {
-      this.toggleAdd = false;
+  togglePending() {
+    if(this.togglePReq) {
+      this.togglePReq = false;
     } else {
-      this.toggleAdd = true;
+      this.togglePReq = true;
+    }
+  }
+
+  toggleAllRequests() {
+    if(this.toggleRequests) {
+      this.toggleRequests = false;
+    } else {
+      this.toggleRequests = true;
     }
   }
 
@@ -60,21 +70,21 @@ export class ListRequestComponent implements OnInit {
     });
   }
   
-  addRequest() {
-    this.requestService.addRequest(this.newRequest).subscribe((response) => {
-      console.log(response);
-      this.newRequest = {
-        reqId: 0,
-        userId: 0,
-        reqType: '',
-        reqAmount: 0,
-        reqStatus: '',
-        submitDate: '',
-        approvedDate: '',
-        manager: ''
-      };
+  // addRequest() {
+  //   this.requestService.addRequest(this.newRequest).subscribe((response) => {
+  //     console.log(response);
+  //     this.newRequest = {
+  //       reqId: 0,
+  //       userId: 0,
+  //       reqType: '',
+  //       reqAmount: 0,
+  //       reqStatus: '',
+  //       submitDate: '',
+  //       approvedDate: '',
+  //       manager: ''
+  //     };
 
-      this.loadAllRequests();
-    });
-  }
+  //     this.loadAllRequests();
+  //   });
+  // }
 }
