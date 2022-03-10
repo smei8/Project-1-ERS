@@ -25,7 +25,7 @@
                         <tr *ngFor="let request of allRequests">
                             <td>{{ request.reqId }}</td>
                             <td>{{ request.userId }}</td>
-                            <td type="password" placeholder="Password">{{ request.reqType }}</td>
+                            <td>{{ request.reqType }}</td>
                             <td>{{ request.reqAmount | currency }}</td>
                             <td>{{ request.reqStatus }}</td>
                             <td>{{ request.submitDate }}</td>
@@ -49,7 +49,7 @@
                 <div class="d-grid">
                     <button type="button" class="btn btn-warning btn-block" (click)="togglePending()">All Pending Reimbursement Request</button>
                 </div>
-
+                <!-- <div>{{ noPendingMessage }}</div> -->
                 <table class="table table-hover" *ngIf="togglePReq">
                     <thead>
                         <tr>
@@ -64,28 +64,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let request of allRequests">
+                        <tr *ngFor="let request of allPRequests">
                             <td>{{ request.reqId }}</td>
                             <td>{{ request.userId }}</td>
-                            <td type="password" placeholder="Password">{{ request.reqType }}</td>
+                            <td>{{ request.reqType }}</td>
                             <td>{{ request.reqAmount | currency }}</td>
                             <td>{{ request.reqStatus }}</td>
                             <td>{{ request.submitDate }}</td>
                             <td>{{ request.approvedDate }}</td>
                             <td>{{ request.manager }}</td>
                             <td>
-                                <button type="button" class="btn btn-warning">
-                                    <i class="material-icons">check</i></button>
+                                <button 
+                                    type="button" 
+                                    class="btn btn-primary"
+                                    (click)="goToReviewRequest(request)">
+                                    <i class="material-icons">edit</i>
+                                </button>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <button type="button" class="btn btn-warning">
                                     <i class="material-icons">close</i>
                                 </button>
-                            </td>
+                            </td> -->
                         </tr>
                     </tbody>
+
                 </table>
-            </div>
         </div>
     </div>
 </div>

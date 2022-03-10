@@ -81,19 +81,15 @@
                             <tr *ngFor="let request of allEpRequests">
                                 <td>{{ request.reqId }}</td>
                                 <td>{{ request.userId }}</td>
-                                <td type="password" placeholder="Password">{{ request.reqType }}</td>
+                                <td>{{ request.reqType }}</td>
                                 <td>{{ request.reqAmount | currency }}</td>
                                 <td>{{ request.reqStatus }}</td>
                                 <td>{{ request.submitDate }}</td>
                                 <td>{{ request.approvedDate }}</td>
                                 <td>{{ request.manager }}</td>
                                 <td>
-                                    <button type="button" class="btn btn-warning">
-                                        <i class="material-icons">check</i></button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-warning">
-                                        <i class="material-icons">close</i>
+                                    <button type="button" class="btn btn-warning-small">
+                                        <i class="material-icons">cancel</i>
                                     </button>
                                 </td>
                             </tr>

@@ -2,6 +2,7 @@ import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EditAccountComponent } from './account/edit-account/edit-account.component';
 import { ListAccountComponent } from './account/list-account/list-account.component';
+import { EditRequestComponent } from './reimbursement/edit-request/edit-request.component';
 import { ListRequestComponent } from './reimbursement/list-request/list-request.component';
 import { AuthGuard } from './user/auth.guard';
 import { EmployeeComponent } from './user/employee/employee.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'employee-home', component: EmployeeComponent, canActivate: [AuthGuard] },
   { path: 'manager-home', component: ManagerComponent, canActivate: [AuthGuard] },
   { path: 'ep-request', component: EpRequestComponent, canActivate: [AuthGuard] },
+  { path: 'edit-request', component: EditRequestComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent, },
   { path: 'logout', component: LogoutComponent }
 ];

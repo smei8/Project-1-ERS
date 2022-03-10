@@ -12,7 +12,12 @@ import { ConnectableObservable } from 'rxjs';
 })
 export class ListRequestComponent implements OnInit {
 
+  pendingReq: boolean = false;
+  pendingStatus: number = 0;
+  noPendingMessage: string = "";
+
   allRequests: Request[] = [];
+  allPRequests: Request[] = [];
 
   togglePReq: boolean = false;
   toggleRequests: boolean = false;
@@ -22,7 +27,7 @@ export class ListRequestComponent implements OnInit {
       userId: 0,
       reqType: '',
       reqAmount: 0,
-      reqStatus: '',
+      reqStatus: 0,
       submitDate: '',
       approvedDate: '',
       manager: ''
@@ -34,6 +39,7 @@ export class ListRequestComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadAllRequests();
+    this.loadPendingRequset();
   }
 
   togglePending() {
@@ -50,6 +56,10 @@ export class ListRequestComponent implements OnInit {
     } else {
       this.toggleRequests = true;
     }
+  }
+
+  yesClicked() {
+    this.pendingReq = true;
   }
 
   loadAllRequests() {
@@ -70,21 +80,38 @@ export class ListRequestComponent implements OnInit {
     });
   }
   
-  // addRequest() {
-  //   this.requestService.addRequest(this.newRequest).subscribe((response) => {
-  //     console.log(response);
-  //     this.newRequest = {
-  //       reqId: 0,
-  //       userId: 0,
-  //       reqType: '',
-  //       reqAmount: 0,
-  //       reqStatus: '',
-  //       submitDate: '',
-  //       approvedDate: '',
-  //       manager: ''
-  //     };
+  loadPendingRequset() {
+    let currentUser: any = this.authService.retrieveUser();
+    this.requestService.viewAllRequest().subscribe((response) => {
+      console.log(response);
 
-  //     this.loadAllRequests();
-  //   });
-  // }
+      for(let i = 0; i < response.length; i++) {
+        if(response[i].reqStatus==1 && response[i].manager==currentUser.userID) {
+          console.log(response[i]);
+          this.allPRequests.push(response[i]);
+          console.log(this.allPRequests);
+        } else {
+          this.noPendingMessage="No Pending Request Yet"
+        }
+      }
+    });
+  }
+
+  goToReviewRequest(request: Request) {
+    console.log("entering goToReview");
+    console.log(request);
+    // let currentRequest: any = this.requestService.fetchARequest(this.newRequest.reqId);
+    // this.newRequest = {
+    //   reqId: currentRequest.reqId,
+    //   userId: currentRequest.userId,
+    //   reqType: currentRequest.reqType,
+    //   reqAmount: currentRequest.reqAmount,
+    //   reqStatus: currentRequest.reqStatus,
+    //   submitDate: currentRequest.submitDate,
+    //   approvedDate: currentRequest.approvedDate,
+    //   manager: currentRequest.manager
+    // };
+    this.router.navigate(['edit-request', request]);
+  }
 }
+

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Account } from 'src/app/account/account.model';
 import { AccountService } from 'src/app/account/account.service';
 import { AuthService } from '../auth.service';
+import { RequestService } from 'src/app/reimbursement/request.service';
 
 @Component({
   selector: 'app-manager',
@@ -19,9 +20,10 @@ export class ManagerComponent implements OnInit {
     role_id: 0,
     role: ''
   }
-  
+
   constructor(private authService: AuthService,
-              private accountService: AccountService) { }
+              private accountService: AccountService,
+              private requestService: RequestService) { }
 
   ngOnInit(): void {
     this.loadCurrentUser();
@@ -34,4 +36,6 @@ export class ManagerComponent implements OnInit {
       this.newAccount = response;
     });
   }
+
+ 
 }

@@ -5,7 +5,7 @@ export interface Request {
     userId: number,
     reqType: string,
     reqAmount: number,
-    reqStatus: string,
+    reqStatus: number,
     submitDate: string,
     approvedDate: string,
     manager: string

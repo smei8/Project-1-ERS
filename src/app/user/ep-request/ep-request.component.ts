@@ -30,7 +30,7 @@ export class EpRequestComponent implements OnInit {
     userId: 0,
     reqType: '',
     reqAmount: 0,
-    reqStatus: '',
+    reqStatus: 0,
     submitDate: '',
     approvedDate: '',
     manager: ''
@@ -75,7 +75,7 @@ export class EpRequestComponent implements OnInit {
         userId: 0,
         reqType: '',
         reqAmount: 0,
-        reqStatus: '',
+        reqStatus: 0,
         submitDate: '',
         approvedDate: '',
         manager: ''
