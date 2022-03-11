@@ -15,6 +15,10 @@ export class RequestService {
     return this.http.get<Request[]>("http://localhost:4040/api/all/requests");
   }
 
+  viewAllEpRequest(userId: any): Observable<Request[]> {
+    return this.http.get<Request[]>("http://localhost:4040/api/epRequests/"+userId);
+  }
+
   addRequest(requestModel: Request): Observable<Request> {
     return this.http.post<Request>("http://localhost:4040/api/requests", JSON.stringify(requestModel));
   }
@@ -34,7 +38,7 @@ export class RequestService {
     // return this.http.put<any>(`http://localhost:4040/api/requests/${reqId}/${reqStatus}`,JSON.stringify(Request));
   }
 
-  deleteRequest(reqId: number): Observable<Request> {
+  deleteRequest(reqId: number): Observable<Request>{
     return this.http.delete<Request>("http://localhost:4040/api/request/"+reqId);
   }
 }

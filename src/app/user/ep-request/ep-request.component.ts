@@ -13,9 +13,11 @@ import { AccountService } from 'src/app/account/account.service';
   styleUrls: ['./ep-request.component.css']
 })
 export class EpRequestComponent implements OnInit {
+  
+  newReqList: Request[] = [];
+  currentEmployee: any = null;  //current employee info that logged in from sess.storage
 
-  currentEmployee: any = null;
-  allEpRequests: Request[] = [];
+  allEpRequests: Request[] = [];  //empty array to hold all current employee requests
   toggleAdd: boolean = false;
   
   newAccount: Account = {
@@ -48,7 +50,8 @@ export class EpRequestComponent implements OnInit {
   ngOnInit(): void {
     this.currentEmployee = this.authService.retrieveUser();
     console.log(this.currentEmployee);
-    this.loadAllRequests();
+
+    this.loadAllEpReq();
   }
 
   toggleAddForm() {
@@ -59,18 +62,47 @@ export class EpRequestComponent implements OnInit {
     }
   }
 
-  loadAllRequests() {
-    this.currentEmployee = this.authService.retrieveUser();
-    this.requestService.viewAllRequest().subscribe((response) => {
-      console.log(response);
+  // loadAllEpRequests() {
+  //   this.requestService.viewAllRequest().subscribe((response) => {
+  //     console.log(response);
+  //     console.log(this.allEpRequests);
+  //     this.allEpRequests = response;
 
-      for(let i = 0; i < response.length; i++) {
-        if(response[i].userId == this.currentEmployee.userID) {
-          this.allEpRequests.push(response[i]);
-        }
-      }
+  //     for(let i = 0; i < this.allEpRequests.length; i++) {
+  //       if(this.allEpRequests[i].userId == this.currentEmployee.userID) {
+  //         this.newReqList[i] = this.allEpRequests[i];
+  //         console.log(this.newReqList);
+  //       }
+  //     }
+
+  //   });
+
+  loadAllEpReq() {
+    this.requestService.viewAllEpRequest(this.currentEmployee.userID).subscribe((response) => {
+      console.log(response);
+      this.allEpRequests = response;
     });
   }
+    
+
+    //this.currentEmployee = this.authService.retrieveUser();
+    // this.requestService.viewAllRequest().subscribe((response) => {
+    //   console.log(response);
+    //   console.log(this.allEpRequests);
+
+    //   for(let i = 0; i < response.length; i++) {
+    //     if(response[i].userId == this.currentEmployee.userID) {
+    //       this.allEpRequests.push(response[i]);
+    //       //this.newRequest[i] = response[i];
+    //       console.log(this.allEpRequests);
+    //     }
+
+    //   }
+
+      
+    //   this.newReqList = this.allEpRequests;
+    // });
+  
 
   addRequest() {
     // let userID: any = this.activatedRoute.snapshot.paramMap.get("userID");
@@ -79,11 +111,10 @@ export class EpRequestComponent implements OnInit {
     //   console.log(response);
     //   this.newAccount = response;
     // });
-   
-    console.log(this.currentEmployee);
+
     this.newRequest.userId = this.currentEmployee.userID;
     this.requestService.addRequest(this.newRequest).subscribe((response) => {
-      console.log(response);
+
       this.newRequest = {
         reqId: 0,
         userId: 0,
@@ -94,16 +125,16 @@ export class EpRequestComponent implements OnInit {
         approvedDate: '',
         manager: ''
       };
-      console.log(this.newRequest);
-      this.loadAllRequests();
+
+      this.loadAllEpReq();
     });
   }
 
   deleteRequest(reqId: number) {
     this.requestService.deleteRequest(reqId).subscribe((response) => {
       console.log(response);
-      
-      this.loadAllRequests();
+      this.loadAllEpReq();
     });
   }
+
 }

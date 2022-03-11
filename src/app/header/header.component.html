@@ -18,7 +18,8 @@
               <a class="nav-link" routerLink="ep-request">Expense Reimbursement</a>
             </li>
             <li class="nav-item" *ngIf="isLoggedIn()==false">
-              <a class="nav-link" routerLink="login">Login</a>
+              <a class="nav-link" routerLink="login">
+                <div class="d-flex justify-content-end">Login</div></a>
             </li>
             <li class="nav-item" *ngIf="isLoggedIn()==true">
               <a class="nav-link" routerLink="logout">Logout</a>
