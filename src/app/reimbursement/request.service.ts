@@ -34,7 +34,7 @@ export class RequestService {
     // return this.http.put<any>(`http://localhost:4040/api/requests/${reqId}/${reqStatus}`,JSON.stringify(Request));
   }
 
-  // deleteRequest(reqId: number): Request[] {
-  
-  // }
+  deleteRequest(reqId: number): Observable<Request> {
+    return this.http.delete<Request>("http://localhost:4040/api/request/"+reqId);
+  }
 }

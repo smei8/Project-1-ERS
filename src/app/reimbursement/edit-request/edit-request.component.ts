@@ -30,8 +30,8 @@ export class EditRequestComponent implements OnInit {
     console.log(reqId);
     // fetch the book with the bookId from the service layer
     this.requestService.fetchARequest(reqId).subscribe((response)=>{
-    this.pendingRequest = response;
-    })
+      this.pendingRequest = response;
+    });
   }
 
   

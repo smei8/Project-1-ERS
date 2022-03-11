@@ -13,13 +13,14 @@
                         <form #myFormTemplate="ngForm" (ngSubmit)="addRequest()">
                             <div class="card-body">
                                 <div class="mb-3 mt-3">
-                                    <label for="userId" class="form-label">User Id:</label>
-                                    <input type="text"
+                                    <label for="title" class="form-label">User Id:</label>
+                                    {{ currentEmployee.userID }}
+                                    <!-- <input type="text"
                                            class="form-control" 
                                            id="userId"
                                            name="requestUserId"
                                            required #myrequestUserId="ngModel"
-                                           [(ngModel)]="newRequest.userId">
+                                           [(ngModel)]="newRequest.userId"> -->
                                 </div>
                                 <div class="mb-3 mt-3">
                                     <label for="type" class="form-label">Request Type:</label>
@@ -88,7 +89,8 @@
                                 <td>{{ request.approvedDate }}</td>
                                 <td>{{ request.manager }}</td>
                                 <td>
-                                    <button type="button" class="btn btn-warning-small">
+                                    <button type="button" class="btn btn-warning-small"
+                                        (click)="deleteRequest(request.reqId)">
                                         <i class="material-icons">cancel</i>
                                     </button>
                                 </td>
